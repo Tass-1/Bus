@@ -1,0 +1,200 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column; /* Change to column for vertical layout */
+    color: white;
+}
+
+/* Background Video */
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.info-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    width: 600px;
+    margin: auto; /* Center the container */
+    overflow-y: auto; /* Allow scrolling within this container */
+    max-height: calc(100vh - 60px); /* Limit height to allow room for footer */
+}
+
+h1 {
+    color: #ffc107;
+    margin-bottom: 20px;
+}
+.modal {
+    display: block;  /* Ensure the modal is being shown */
+    position: fixed; /* Ensure it stays on top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
+    z-index: 999; /* Ensure it's above other content */
+}
+
+
+.developer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #ffc107;
+    cursor: pointer;  /* Makes the cursor change to indicate a clickable area */
+    border: 1px solid red;  /* Debugging purpose */
+    padding: 10px;
+}
+
+.developer img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.developer-info {
+    text-align: left;
+    margin-left: 20px;
+    flex: 1;
+}
+
+.developer-name {
+    font-size: 18px;
+    color: #ffc107;
+}
+
+.back-button {
+    background-color: #ffc107;
+    color: black;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #e0a800;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 400px;
+    color: white;
+}
+
+.modal-content img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #ffc107;
+}
+
+.social-media {
+    margin-top: 10px;
+}
+
+.social-media a {
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.social-media a:hover {
+    color: #ffc107;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    padding: 10px;
+    position: fixed; /* Fixed to the bottom */
+    bottom: -100px; /* Initially hidden */
+    left: 0;
+    width: 100%;
+    transition: bottom 0.5s; /* Smooth transition for the footer */
+}
+
+.footer a {
+    color: #ffc107;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.tooltip {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position tooltip above the link */
+    left: 50%;
+    margin-left: -60px; /* Center the tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.footer a:hover .tooltip {
+    visibility: visible;
+    opacity: 1; /* Show tooltip on hover */
+}
+
+.background-video {
+    position: absolute;  /* Position the video behind other elements */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video fills the screen without distortion */
+    z-index: -1;  /* Places the video behind other content */
+}

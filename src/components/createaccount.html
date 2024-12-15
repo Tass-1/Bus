@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000; script-src 'self' 'unsafe-inline' http://localhost:3000; style-src 'self' 'unsafe-inline'; font-src 'self' data:;"> -->
+    <title>Create Account</title>
+    <style>
+        /* General Page Styles */
+        body, html {
+            height: 100%;
+            margin: 0;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+        }
+
+        .account-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            width: 350px;
+            z-index: 1;
+        }
+
+        h2 {
+            color: #ffc107;
+        }
+
+        input[type="text"], input[type="password"], input[type="email"], input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #ffc107;
+            color: black;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e0a800;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: -100px; /* Initially hidden */
+            width: 100%;
+            transition: bottom 0.3s ease;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .tooltip {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            z-index: 10;
+            white-space: nowrap;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+        }
+
+        .footer a:hover .tooltip {
+            display: block;
+        }
+
+        .footer p {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <video autoplay muted loop class="bg-video">
+        <source src="bg.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Create Account Container -->
+    <div class="account-container"> 
+        <h2>Create an Account</h2> 
+        <form id="createAccountForm"> 
+            <input type="text" name="name" id="fullName" placeholder="Full Name" required> 
+            <input type="tel" name="number" id="phoneNumber" placeholder="Phone Number (10 digits)" pattern="[0-9]{10}" required> 
+            <input type="email" name="email" id="email" placeholder="Gmail Account" required> 
+            <input type="text" name="Username" id="newUsername" placeholder="Username" required> 
+            <input type="password" name="password" id="newPassword" placeholder="Password (min. 8 characters)" required> 
+            <input type="submit" value="Create Account"> 
+        </form> 
+    </div>
+    
+    <script>
+    document.getElementById('createAccountForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const form = e.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        
+        try {
+            const response = await fetch('http://localhost:3000/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            const responseData = await response.json();
+            
+            if (response.ok) {
+                alert(responseData.message);
+                form.reset();
+            } else {
+                alert(responseData.message || 'Registration failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred during registration');
+        }
+    });
+    </script>
+    <!-- Footer Section -->
+    <div class="footer" id="footer">
+        <a href="#">About
+            <span class="tooltip">Learn more about us and our services.</span>
+        </a>
+        <a href="#">Accessibility
+            <span class="tooltip">We are committed to providing accessibility for all users.</span>
+        </a>
+        <a href="#">Help Center
+            <span class="tooltip">Find answers to your questions in our Help Center.</span>
+        </a>
+        <a href="#">Privacy & Terms
+            <span class="tooltip">Read our Privacy Policy and Terms of Service.</span>
+        </a>
+        <a href="#">Ad Choices
+            <span class="tooltip">Manage your ad preferences.</span>
+        </a>
+        <a href="#">Advertising
+            <span class="tooltip">Advertise with us to reach your target audience.</span>
+        </a>
+        <a href="#">Business Services
+            <span class="tooltip">Explore our range of business services.</span>
+        </a>
+        <a href="#">Get the App
+            <span class="tooltip">Download our app for seamless on-the-go access.</span>
+        </a>
+        <p>VIT Bus Tracking Corporation © 2024</p>
+    </div>
+
+    <script>
+        // Handle form submission
+        document.getElementById('createAccountForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const username = document.getElementById('newUsername').value.trim();
+            const password = document.getElementById('newPassword').value;
+
+            // Password strength check
+            if (password.length < 8) {
+                alert("Password must be at least 8 characters long.");
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullName, phoneNumber, email, username, password }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert(result.message || "Account created successfully! Redirecting to login page...");
+                    window.location.href = 'login.html'; // Redirect to login page
+                } else {
+                    alert(result.error || "Failed to create account.");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("An error occurred. Please try again later.");
+            }
+        });
+
+        // Footer visibility on hover near bottom
+        const footer = document.getElementById('footer');
+        let footerTimeout;
+
+        document.addEventListener('mousemove', function(event) {
+            const y = event.clientY;
+            const windowHeight = window.innerHeight;
+
+            if (y > windowHeight - 50) {
+                clearTimeout(footerTimeout);
+                footer.style.bottom = '0';
+
+                // Hide the footer after 5 seconds
+                footerTimeout = setTimeout(function() {
+                    footer.style.bottom = '-100px';
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Video Background Styles */
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Profile Icon */
+.profile-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    font-size: 24px;
+    color: white;
+}
+.bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    background-size: cover;
+    overflow: hidden;
+    object-fit: cover;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.profile-icon a {
+    text-decoration: none;
+    color: white;
+}
+
+.profile-icon a:hover {
+    color: #ffc107;
+}
+
+.bus-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    width: 350px;
+    z-index: 1;
+}
+
+/* Small Bus Icon Video */
+.bus-icon-video {
+    width: 100px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+h1 {
+    color: #ffc107;
+    margin-bottom: 20px;
+}
+
+.bus-dropdown {
+    margin: 20px 0;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.info-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+.info-icon:hover {
+    color: #ffc107;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    text-align: left;
+    white-space: pre-line;
+}
+
+.feedback-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    font-size: 24px;
+    color: white;
+}
+
+.feedback-icon a {
+    text-decoration: none;
+    color: white;
+}
+
+.feedback-icon a:hover {
+    color: #ffc107;
+}
+
+/* Footer Section with Transparency and Darker Shade */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(25, 33, 55, 0.9); /* Dark blue with transparency */
+    color: #fff; /* White text */
+    text-align: center;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
+  }
+  
+  .footer a {
+    color: #ffcc00; /* Yellow links */
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 16px; /* Adjust font size for better readability */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth color and scale transition on hover */
+  }
+  
+  .footer a:hover {
+    color: #8e44ad; /* Purple on hover */
+    transform: scale(1.1); /* Slightly enlarges on hover for emphasis */
+  }
+  
+  .footer .tooltip {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(142, 68, 173, 0.9); /* Purple background with transparency */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 5;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Shadow for tooltip */
+  }
+  
+  .footer a:hover .tooltip {
+    display: block;
+  }
+  
+  
+
+/* User Info Display */
+.user-info {
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+}

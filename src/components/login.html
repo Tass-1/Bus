@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' http://localhost:3000/DMSans-Regular.ttf,http://localhost:3000/Roboto-Regular.ttf;">
+    <title>Bus Tracking System - Login</title>
+    <style>
+        /* General Page Styles */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            background-color: #f1f3f4;
+        }
+
+        /* Profile Icon in Top Left Corner */
+        .profile-icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Split the screen into two halves */
+        .split {
+            height: 100%;
+            width: 50%;
+            position: fixed;
+        }
+
+        /* Left half for background video */
+        .left-side {
+            left: 0;
+            overflow: hidden;
+        }
+
+        .left-side video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Right half for login form */
+        .right-side {
+            right: 0;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Login Container Styles */
+        .login-container {
+            background-color: white;
+            padding: 60px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            width: 85%;
+            max-width: 450px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Larger and more professional header and text sizes */
+        .login-container h2 {
+            margin-bottom: 30px;
+            color: #202124;
+            font-size: 36px; /* Increased size */
+            font-weight: 500; /* Slightly bolder */
+        }
+
+        .login-container p {
+            margin-bottom: 20px;
+            font-size: 18px; /* Increased size */
+            color: #5f6368;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            font-size: 18px; /* Larger text for inputs */
+            box-sizing: border-box;
+        }
+
+        /* Cylindrical button styles */
+        input[type="submit"] {
+            background-color: #1a73e8;
+            color: white;
+            padding: 16px; /* Larger padding for a bigger button */
+            border: none;
+            border-radius: 50px; /* Makes the button cylindrical */
+            cursor: pointer;
+            font-size: 18px; /* Increased font size for the button */
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1559b7;
+        }
+
+        /* Increased size for the Create Account link */
+        .create-account-link {
+            margin-top: 25px;
+            display: block;
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 16px; /* Larger font size */
+        }
+
+        .create-account-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Pop-up Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            text-align: center;
+            background-color: transparent;
+            color: #757575;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #757575;
+            margin: 0 15px;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Modal pop-up styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 5;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h3 {
+            color: #202124;
+            margin-bottom: 15px;
+            font-size: 24px; /* Increased modal header size */
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+        }
+
+        /* Footer Tooltips */
+        .footer a:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Profile Icon -->
+    <img src="vit-bhopal.jpeg" alt="Profile Icon" class="profile-icon"> <!-- Replace 'vit-bhopal.jpeg' with the correct image path -->
+
+    <!-- Left half with background video -->
+    <div class="split left-side">
+        <video autoplay muted loop>
+            <source src="bg4.mp4" type="video/mp4"> <!-- Replace with your background video -->
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Right half with login form -->
+    <div class="login-container">
+        <h2>VIT Bus Tracker</h2>
+        <h3>Welcome Back</h3>
+        <p>Please log in to continue</p>
+        <form id="loginForm">
+            <input type="text" name="username" id="username" placeholder="Email or Username" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <input type="submit" value="Sign In">
+        </form>
+        <a href="create-account.html" class="create-account-link">Create a new account</a>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                // Log the raw response for debugging
+                console.log('Response status:', response.status);
+                
+                const result = await response.json();
+                console.log('Response result:', result);
+
+                if (response.ok) {
+                    alert(result.message);
+                    // Redirect to dashboard or next page
+                    // window.location.href = '/dashboard.html'; // Uncomment when you have a dashboard
+                } else {
+                    alert(result.message || 'Login failed');
+                }
+            } catch (error) {
+                console.error('Full Error:', error);
+                alert('There was an error during login: ' + error.message);
+            }
+        });
+    </script>
+    
+
+    <!-- Footer Section with Modal Pop-ups -->
+    <div class="footer">
+        <a href="#" data-tooltip="Get help with your account" id="helpLink">Help</a>
+        <a href="#" data-tooltip="View our privacy policies" id="privacyLink">Privacy</a>
+        <a href="#" data-tooltip="Read our terms and conditions" id="termsLink">Terms</a>
+    </div>
+
+    <!-- Modals for Footer Links -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Help Center</h3>
+            <p>Here you can find answers to your questions about the Bus Tracking System.</p>
+        </div>
+    </div>
+
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Privacy Policy</h3>
+            <p>Your privacy is important to us. We ensure that your data is safe and secure.</p>
+        </div>
+    </div>
+
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Terms of Service</h3>
+            <p>Read our terms and conditions before using the Bus Tracking System.</p>
+        </div>
+    </div>
+
+    <script>
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Retrieve saved credentials from localStorage
+            const savedUsername = localStorage.getItem('username');
+            const savedPassword = localStorage.getItem('password');
+
+console.log('Entered Username:', username);
+console.log('Entered Password:', password);
+console.log('Saved Username:', savedUsername);
+console.log('Saved Password:', savedPassword);
+
+// Example user validation logic
+if (username === savedUsername && password === savedPassword) {
+    alert('Login successful! Redirecting...');
+    window.location.href = 'select-bus.html';  // Redirect to another page
+} else {
+    alert('Invalid login credentials. Please try again.');
+}
+});
+
+// Modal handling for footer links
+const helpModal = document.getElementById('helpModal');
+const privacyModal = document.getElementById('privacyModal');
+const termsModal = document.getElementById('termsModal');
+
+document.getElementById('helpLink').addEventListener('click', function() {
+helpModal.style.display = 'block';
+});
+
+document.getElementById('privacyLink').addEventListener('click', function() {
+privacyModal.style.display = 'block';
+});
+
+document.getElementById('termsLink').addEventListener('click', function() {
+termsModal.style.display = 'block';
+});
+
+// Close modal on close button click
+const closeButtons = document.getElementsByClassName('close');
+for (let i = 0; i < closeButtons.length; i++) {
+closeButtons[i].addEventListener('click', function() {
+    this.parentElement.parentElement.style.display = 'none';
+});
+}
+
+// Close modal when clicking outside the modal content
+window.addEventListener('click', function(event) {
+if (event.target === helpModal) {
+    helpModal.style.display = 'none';
+} else if (event.target === privacyModal) {
+    privacyModal.style.display = 'none';
+} else if (event.target === termsModal) {
+    termsModal.style.display = 'none';
+}
+});
+</script>
+</body>
+</html>
